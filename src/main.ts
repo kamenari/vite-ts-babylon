@@ -1,23 +1,26 @@
-import './style.scss'
-import javascriptLogo from '../javascript.svg'
-import { setupCounter } from '../counter.js'
+import './style.scss';
+import * as BABYLON from '@babylonjs/core';
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const main = async () => {
+  const renderCanvas = <HTMLCanvasElement>(
+    document.getElementById('renderCanvas')
+  );
 
-setupCounter(document.querySelector('#counter'))
+  if (renderCanvas) {
+    const engine = new BABYLON.Engine(renderCanvas, true);
+    const scene = new BABYLON.Scene(engine);
+
+    scene.createDefaultCameraOrLight(true, true, true);
+    scene.createDefaultEnvironment();
+
+    const boxSize = 0.2;
+    const box = BABYLON.MeshBuilder.CreateBox("box", { size: boxSize });
+    box.position.addInPlaceFromFloats(0, boxSize / 2.0, 0);
+
+    engine.runRenderLoop(() => {
+      scene.render();
+    });
+  }
+};
+
+main();

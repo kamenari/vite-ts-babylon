@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# SSL/TLSサーバー証明書
+cert.pem
+key.pem
