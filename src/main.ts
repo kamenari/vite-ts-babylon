@@ -15,8 +15,9 @@ const main = async () => {
 
     const boxSize = 0.2;
     const box = BABYLON.MeshBuilder.CreateBox("box", { size: boxSize });
+    box.position.addInPlaceFromFloats(0, boxSize / 2.0, 0);
     // Cubeの高さを1.6mに設定
-    box.position.addInPlaceFromFloats(0, 1.6, 0);
+    // box.position.addInPlaceFromFloats(0, 1.6, 0);
 
     await scene.createDefaultXRExperienceAsync({
       uiOptions: {
